@@ -12,14 +12,14 @@ dest_path = './images/'
 def try_download(source: str, dest: str, name: str):
     r = requests.get(source, allow_redirects=True)
     if r.ok:
-        with open(f'{dest}{name}', 'wb') as f:
+        with open(dest + name, 'wb') as f:
             f.write(r.content)
     else:
-        print(f'Failed to download the file: {name}')
+        print('Failed to download the file:' + name)
         
 
 def download(img: dict, dest_path: str):
-    if img['flickr_url'] is not None and not os.path.isfile(f'{dest_path}{img["file_name"]}'):
+    if img['flickr_url'] is not None and not os.path.isfile(dest_path + img["file_name"]):
         try_download(img['flickr_url'], dest_path, img['file_name'])
 
 def main():
